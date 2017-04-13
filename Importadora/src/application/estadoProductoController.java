@@ -15,7 +15,7 @@ public class estadoProductoController {
 	@FXML
 	private Button boton;
 	
-	ObservableList<String> estados = FXCollections.observableArrayList("Entregado","Sin Observaciones","Danhado","En Deposito");
+	ObservableList<String> estados = FXCollections.observableArrayList("Entregado","SinObservaciones","Danhado","En Deposito");
 	
 	@FXML
 	private void inicializar(){
