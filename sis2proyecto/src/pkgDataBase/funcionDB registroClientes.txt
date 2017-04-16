@@ -1,0 +1,22 @@
+CREATE OR REPLACE FUNCTION registrarcliente(Character Varying, Character Varying, integer) 
+RETURNS text AS $$
+
+DECLARE
+resultado text;
+existe integer;
+
+BEGIN
+   existe:=(select count(*) from cliente where cliente.id_cliente=$3 );
+   IF existe=0 THEN
+    
+    insert into cliente(id_cliente,nombre,apellido)values($3,$1,$2);
+	resultado:='registrado';
+   ELSE
+
+    	resultado:=  'ci/nit existente';
+   END IF;
+   
+   return resultado;
+
+END;
+$$ LANGUAGE plpgsql

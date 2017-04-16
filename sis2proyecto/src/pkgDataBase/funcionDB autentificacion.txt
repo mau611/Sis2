@@ -1,0 +1,23 @@
+CREATE OR REPLACE FUNCTION autentificacionUser(Character Varying, Character Varying, Character Varying) 
+RETURNS text AS $$
+
+DECLARE
+resultado text;
+existe integer;
+id_user integer;
+
+BEGIN
+   existe:=(select count(*) from usuario where usuario.login=$1 and usuario.password=$2 );
+   IF existe=1 THEN
+	id_user:=(select usuario.id_usuario from usuario where usuario.login=$1 and usuario.password=$2);
+    insert into session(id_usuario, dir_ip, activo_session, fecha_session, pid)values(id_user,$3,true,current_timestamp,pg_backend_pid());
+	resultado:='correcto';
+   ELSE
+
+    	resultado:=  'NoRegistrado';
+   END IF;
+   
+   return resultado;
+
+END;
+$$ LANGUAGE plpgsql
