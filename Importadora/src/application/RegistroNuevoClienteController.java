@@ -33,7 +33,7 @@ public class RegistroNuevoClienteController {
                 String retorno=res.getString("registrarcliente");
                 if (retorno.equals("registrado")) {
  
-                    //registrar pedido
+                    res=conector.consultar("Select registrarPedido("+carnetCli+",'"+apellidoCli+"','"+nombreCli+"' );");
                                             
                 } else{
                     System.out.println(retorno);

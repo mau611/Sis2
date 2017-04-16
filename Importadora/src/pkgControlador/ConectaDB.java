@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class ConectaDB {
     public static final String user = "postgres";
-    public static final String password = "123456789H";
+    public static final String password = "123542789N";
     public static final String driver = "org.postgresql.Driver";
     public static final String BDurl = "jdbc:postgresql://localhost:5432/Importadora";
     public static Statement st;
