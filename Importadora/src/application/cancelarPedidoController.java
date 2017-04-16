@@ -6,27 +6,10 @@
 package application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class cancelarPedidoController  {
-    //LABEL ID PEDIDO A LADO DE CAMPO DE TEXTO PARA BUSCAR
-    @FXML
-    private Label titIdPedido; 
-     // TODOS LOS QUE LLEVAN TIT SON LOS LABELS QUE DESCRIBEN LOS CAMPOS 
-    //Son labels de la consulta 
-    @FXML
-    private Label titProducto;
-    @FXML
-    private Label titCantidad;
-    @FXML
-    private Label titFechaPedido;
-    @FXML
-    private Label titCancelar;
-    @FXML 
-    private Label titSupID;
-    @FXML
     // LOS LABELS QUE LLEVAN RESP SON LOS QUE PONDRAN LA RESPUESTA DESPUES DE LA CONSULTA
     private Label respProducto; 
     @FXML
@@ -41,10 +24,6 @@ public class cancelarPedidoController  {
     @FXML 
     private TextField campoBusqueda; 
     //botones
-    @FXML
-    private Button btnBuscarPedido; 
-    @FXML
-    private Button btnCancelarPedido;
 
     @FXML
     private void buscarPedido(ActionEvent event) {

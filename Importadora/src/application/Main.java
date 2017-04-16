@@ -8,15 +8,20 @@ import javafx.fxml.FXMLLoader;
 
 
 public class Main extends Application {
+        public static Stage stage;
+         static ConectaDB conector;
 	@Override
 	public void start(Stage primaryStage) {
+                conector = new ConectaDB();
+                stage = primaryStage;
 		try {
-			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("RegistroEmpleado.fxml"));
-			Scene scene = new Scene(root,500,500);
+			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("login.fxml"));
+			Scene scene = new Scene(root,353,239);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
-			primaryStage.setResizable(false);
+			stage.setScene(scene);
+                        stage.setTitle("LOGIN");
+			stage.show();
+			stage.setResizable(false);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

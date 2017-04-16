@@ -19,6 +19,6 @@
       <Label fx:id="respCantidad" layoutX="245.0" layoutY="267.0" text="Label" />
       <Label fx:id="respFechaPedido" layoutX="245.0" layoutY="306.0" text="Label" />
       <Label fx:id="respCancelar" layoutX="245.0" layoutY="355.0" text="Label" />
-      <Button fx:id="btnBuscarPedido" layoutX="370.0" layoutY="70.0" mnemonicParsing="false" onAction="#buscarPedido" prefHeight="25.0" prefWidth="91.0" text="BUSCAR" />
+      <Button fx:id="btnBuscarPedido" defaultButton="true" layoutX="370.0" layoutY="70.0" mnemonicParsing="false" onAction="#buscarPedido" prefHeight="25.0" prefWidth="91.0" text="BUSCAR" />
    </children>
 </AnchorPane>

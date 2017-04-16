@@ -7,9 +7,6 @@ package application;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author henry hace tarea
  */
 public class RegistroEmpleadoController {
-    @FXML
+   /* @FXML
     private Label titulo;
     //Labels usados para mostrar que va en cada casilla 
     @FXML
@@ -39,7 +36,7 @@ public class RegistroEmpleadoController {
     private TextField tfDireccion;
     //Botones
     @FXML
-    private Button btnRegistrar;
+    private Button btnRegistrar;*/
     
     @FXML
     private void registrar(ActionEvent e){
