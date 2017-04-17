@@ -2,7 +2,7 @@ CREATE OR REPLACE FUNCTION registrarcliente(Character Varying, Character Varying
 RETURNS text AS $$
 
 DECLARE
-resultado text;
+id_cliente integer;
 existe integer;
 
 BEGIN
@@ -10,13 +10,13 @@ BEGIN
    IF existe=0 THEN
     
     insert into cliente(id_cliente,nombre,apellido)values($3,$1,$2);
-	resultado:='registrado';
+	id_cliente:=$3;
    ELSE
 
-    	resultado:=  'ci/nit existente';
+    	id_cliente:= 0;
    END IF;
    
-   return resultado;
+   return id_cliente;
 
 END;
 $$ LANGUAGE plpgsql

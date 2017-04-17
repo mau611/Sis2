@@ -1,0 +1,16 @@
+CREATE OR REPLACE FUNCTION registrarproducto(Character Varying, integer) 
+RETURNS text AS $$
+
+DECLARE
+resultado integer;
+BEGIN
+
+    
+    insert into producto(nombre_pro,costo_pro)values($1,$2);
+	resultado:=(SELECT MAX(id_producto) FROM producto);
+
+   
+   return resultado;
+
+END;
+$$ LANGUAGE plpgsql

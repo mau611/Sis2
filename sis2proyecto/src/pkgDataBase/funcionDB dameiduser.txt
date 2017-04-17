@@ -1,0 +1,11 @@
+CREATE OR REPLACE FUNCTION dameIdUser() 
+RETURNS integer AS $$
+DECLARE
+id_user integer;
+BEGIN
+
+	id_user:= (select session.id_usuario from session where session.pid=pg_backend_pid());
+    return id_user;
+
+END;
+$$ LANGUAGE plpgsql

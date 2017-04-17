@@ -1,0 +1,35 @@
+CREATE OR REPLACE FUNCTION registrarPedido(Character Varying, Character Varying, integer,Character Varying, integer, integer,Character Varying,date,date,integer) 
+RETURNS text AS $$
+
+DECLARE
+resultado text;
+existe integer;
+id_produc integer;
+id_cli integer;
+id_user integer;
+id_provee integer;
+pedido_id integer;
+
+BEGIN
+
+	id_produc:=(SELECT registrarproducto($4,$6));
+    id_cli:=(SELECT registrarcliente($1,$2,$3));
+    id_user:=(SELECT dameiduser());
+    id_provee:=(SELECT dameidprovee($7));
+
+    
+    
+   IF id_produc>0 THEN
+    insert into pedido(id_usuario, id_cliente, id_est, id_proveedor, fecha_pedido,fecha_llegada,costo_pedido)values(id_user,id_cli,1,id_provee,$8,$9,$10);
+    pedido_id:=(SELECT MAX(id_pedido) FROM pedido);
+    insert into producto_pedido(id_pedido,id_producto,cantidad_producto)values(pedido_id,id_produc,$5);
+	resultado:='registrado';
+   ELSE
+
+    	resultado:=  'error';
+   END IF;
+   
+   return resultado;
+
+END;
+$$ LANGUAGE plpgsql

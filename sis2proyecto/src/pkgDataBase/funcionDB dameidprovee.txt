@@ -1,0 +1,13 @@
+CREATE OR REPLACE FUNCTION dameidprovee(Character Varying) 
+RETURNS integer AS $$
+DECLARE
+id_provee integer;
+BEGIN
+
+	id_provee:= (select proveedor.id_proveedor  from proveedor where proveedor.nombre_prov=$1);
+  
+    
+    return id_provee;
+
+END;
+$$ LANGUAGE plpgsql
