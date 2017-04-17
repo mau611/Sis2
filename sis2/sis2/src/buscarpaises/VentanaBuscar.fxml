@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="229.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="buscarpaises.VentanaBuscarController">
+   <children>
+      <Label fx:id="labBuscador" layoutX="253.0" layoutY="14.0" text="Buscador Paises">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="labNombrePais" layoutX="23.0" layoutY="62.0" text="Nombre Pais" />
+      <TextField fx:id="txtFNomp" layoutX="104.0" layoutY="58.0" />
+      <Button fx:id="bttnBuscar" layoutX="281.0" layoutY="58.0" mnemonicParsing="false" onAction="#buscar" text="Buscar" />
+      <Label fx:id="labNombre" layoutX="47.0" layoutY="136.0" text="Nombre" />
+      <TextField fx:id="txtfNom" layoutX="110.0" layoutY="132.0" />
+      <Label fx:id="labCosto" layoutX="300.0" layoutY="136.0" text="Costo" />
+      <TextField fx:id="txtFCosto" layoutX="345.0" layoutY="132.0" />
+      <Button fx:id="bttnAceptar" layoutX="255.0" layoutY="181.0" mnemonicParsing="false" text="Aceptar" />
+   </children>
+</AnchorPane>
