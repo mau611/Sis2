@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 8                                 */
-/* Created on:     16/4/2017 12:25:37                           */
+/* Created on:     16/4/2017 22:27:35                           */
 /*==============================================================*/
 
 
@@ -56,8 +56,6 @@ drop index REALIZA_FK;
 
 drop index SE_OBTIENE_FK;
 
-drop index CONTIENE_FK;
-
 drop index PEDIDO_PK;
 
 drop table PEDIDO;
@@ -73,6 +71,14 @@ drop table PEDIDO_FACTURA;
 drop index PRODUCTO_PK;
 
 drop table PRODUCTO;
+
+drop index PERTENECE_A_FK;
+
+drop index CONTIENE_A_FK;
+
+drop index PRODUCTO_PEDIDO_PK;
+
+drop table PRODUCTO_PEDIDO;
 
 drop index SE_ENCUENTRA_FK;
 
@@ -301,7 +307,6 @@ ID_PAIS
 /*==============================================================*/
 create table PEDIDO (
    ID_PEDIDO            SERIAL               not null,
-   ID_PRODUCTO          INT4                 null,
    ID_USUARIO           INT4                 null,
    ID_CLIENTE           NUMERIC(10)          null,
    ID_EST               INT4                 null,
@@ -317,13 +322,6 @@ create table PEDIDO (
 /*==============================================================*/
 create unique index PEDIDO_PK on PEDIDO (
 ID_PEDIDO
-);
-
-/*==============================================================*/
-/* Index: CONTIENE_FK                                           */
-/*==============================================================*/
-create  index CONTIENE_FK on PEDIDO (
-ID_PRODUCTO
 );
 
 /*==============================================================*/
@@ -391,7 +389,6 @@ ID_FACTURA
 create table PRODUCTO (
    ID_PRODUCTO          SERIAL               not null,
    NOMBRE_PRO           VARCHAR(25)          null,
-   CANTIDAD_PRO         INT4                 null,
    COSTO_PRO            INT4                 null,
    constraint PK_PRODUCTO primary key (ID_PRODUCTO)
 );
@@ -400,6 +397,38 @@ create table PRODUCTO (
 /* Index: PRODUCTO_PK                                           */
 /*==============================================================*/
 create unique index PRODUCTO_PK on PRODUCTO (
+ID_PRODUCTO
+);
+
+/*==============================================================*/
+/* Table: PRODUCTO_PEDIDO                                       */
+/*==============================================================*/
+create table PRODUCTO_PEDIDO (
+   ID_PEDIDO            INT4                 not null,
+   ID_PRODUCTO          INT4                 not null,
+   CANTIDAD_PRODUCTO    INT4                 null,
+   constraint PK_PRODUCTO_PEDIDO primary key (ID_PEDIDO, ID_PRODUCTO)
+);
+
+/*==============================================================*/
+/* Index: PRODUCTO_PEDIDO_PK                                    */
+/*==============================================================*/
+create unique index PRODUCTO_PEDIDO_PK on PRODUCTO_PEDIDO (
+ID_PEDIDO,
+ID_PRODUCTO
+);
+
+/*==============================================================*/
+/* Index: CONTIENE_A_FK                                         */
+/*==============================================================*/
+create  index CONTIENE_A_FK on PRODUCTO_PEDIDO (
+ID_PEDIDO
+);
+
+/*==============================================================*/
+/* Index: PERTENECE_A_FK                                        */
+/*==============================================================*/
+create  index PERTENECE_A_FK on PRODUCTO_PEDIDO (
 ID_PRODUCTO
 );
 
@@ -574,11 +603,6 @@ alter table IU_FUNCION
       on delete restrict on update restrict;
 
 alter table PEDIDO
-   add constraint FK_PEDIDO_CONTIENE_PRODUCTO foreign key (ID_PRODUCTO)
-      references PRODUCTO (ID_PRODUCTO)
-      on delete restrict on update restrict;
-
-alter table PEDIDO
    add constraint FK_PEDIDO_ESTA_UN_ESTADO_P foreign key (ID_EST)
       references ESTADO_PEDIDO (ID_EST)
       on delete restrict on update restrict;
@@ -606,6 +630,16 @@ alter table PEDIDO_FACTURA
 alter table PEDIDO_FACTURA
    add constraint FK_PEDIDO_F_TIENE_PEDIDO foreign key (ID_PEDIDO)
       references PEDIDO (ID_PEDIDO)
+      on delete restrict on update restrict;
+
+alter table PRODUCTO_PEDIDO
+   add constraint FK_PRODUCTO_CONTIENE__PEDIDO foreign key (ID_PEDIDO)
+      references PEDIDO (ID_PEDIDO)
+      on delete restrict on update restrict;
+
+alter table PRODUCTO_PEDIDO
+   add constraint FK_PRODUCTO_PERTENECE_PRODUCTO foreign key (ID_PRODUCTO)
+      references PRODUCTO (ID_PRODUCTO)
       on delete restrict on update restrict;
 
 alter table PROVEEDOR
