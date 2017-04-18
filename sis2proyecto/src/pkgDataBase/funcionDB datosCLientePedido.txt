@@ -1,0 +1,19 @@
+CREATE OR REPLACE FUNCTION datosClientePedido(integer) 
+RETURNS record AS $$
+
+DECLARE
+resultado record;
+BEGIN
+
+    
+    select into resultado uno.id_cliente,cliente.nombre
+	from (select id_cliente,costo_pedido
+	 	  from pedido
+	 	  where pedido.id_pedido=$1) uno, cliente
+	where cliente.id_cliente=uno.id_cliente;
+
+   
+   return resultado;
+
+END;
+$$ LANGUAGE plpgsql

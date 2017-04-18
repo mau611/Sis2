@@ -1,0 +1,21 @@
+CREATE OR REPLACE FUNCTION datosProductoPedido(integer) 
+RETURNS record AS $$
+
+DECLARE
+resultado record;
+BEGIN
+
+    
+    select into resultado producto.nombre_pro,producto.costo_pro, dos.cantidad_producto,dos.costo_pedido
+	from (select producto_pedido.id_pedido, producto_pedido.cantidad_producto,producto_pedido.id_producto,uno.costo_pedido
+	 	  from (select id_cliente,costo_pedido,id_pedido
+	 	 	    from pedido
+	 		    where pedido.id_pedido=$1) uno, producto_pedido
+	  	  where uno.id_pedido=producto_pedido.id_pedido)dos,producto
+	where dos.id_producto=producto.id_producto;
+
+   
+   return resultado;
+
+END;
+$$ LANGUAGE plpgsql

@@ -1,9 +1,8 @@
-
 CREATE OR REPLACE FUNCTION registrarPedido(integer,Character Varying, integer, integer,Character Varying,date,date,integer) 
-RETURNS text AS $$
+RETURNS integer AS $$
 
 DECLARE
-resultado text;
+resultado integer;
 existe integer;
 id_produc integer;
 id_cli integer;
@@ -22,16 +21,16 @@ BEGIN
     
    IF id_produc>0 THEN
     if(existeUser<1) then
-    resultado:='UsuarioNoEncotrado';
+    resultado:=0;
     else
     insert into pedido(id_usuario, id_cliente, id_est, id_proveedor, fecha_pedido,fecha_llegada,costo_pedido)values(id_user,$1,1,id_provee,$6,$7,$8);
     pedido_id:=(SELECT MAX(id_pedido) FROM pedido);
     insert into producto_pedido(id_pedido,id_producto,cantidad_producto)values(pedido_id,id_produc,$3);
-	resultado:='registrado';
+	resultado:=pedido_id;
     end if;
    ELSE
 
-    	resultado:=  'error';
+    	resultado:=  -1;
    END IF;
    
    return resultado;
