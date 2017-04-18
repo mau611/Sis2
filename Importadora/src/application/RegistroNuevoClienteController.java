@@ -17,6 +17,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 import pkgControlador.ConectaDB;
 
 public class RegistroNuevoClienteController implements Initializable{
@@ -35,28 +36,34 @@ public class RegistroNuevoClienteController implements Initializable{
         @FXML private TextField txtCstPedido;
         @FXML private ComboBox comboProveedor=new ComboBox(llenarComboProveedor());
 	@FXML public void btnRegistroPedidoAction(ActionEvent ev){
-		String apellidoCli = txtApeCliente.getText();
-                String nombreCli = txtNomcCliente.getText();
-                int carnetCli = Integer.parseInt(txtNitCi.getText());
-                String nombreProducto=txtNomProducto.getText();
-                String cantidadProducto=txtCantPoducto.getText();
-                int productoCantidad=Integer.parseInt(cantidadProducto);
-                String costoProducto=txtCstProducto.getText();
-                int productoCosto=Integer.parseInt(costoProducto);
-                String nombreProveedor=comboProveedor.getValue().toString();
-                String fechaPedido=datePedido.getValue().toString();
-                String fechaLlegada=dateLLegada.getValue().toString();  
-                String costoPedido=txtCstPedido.getText();
-                int pedidoCosto=Integer.parseInt(costoPedido);
-                ResultSet res;
-        
+            verificacion verificador=new verificacion();
+            boolean verificar=false;
+            if(verificador.validarTexto(txtApeCliente.getText()) && verificador.validarTexto(txtNomcCliente.getText()) 
+               && verificador.validarNumero(txtNitCi.getText()) && verificador.validarTextoyNumeros(txtNomProducto.getText())
+               && verificador.validarNumero(txtCantPoducto.getText()) && verificador.validarNumero(txtCstProducto.getText())
+               && verificador.validarTexto(txtCstPedido.getText())){
+                String apellidoCli = txtApeCliente.getText();
+            String nombreCli = txtNomcCliente.getText();
+            int carnetCli = Integer.parseInt(txtNitCi.getText());
+            String nombreProducto=txtNomProducto.getText();
+            String cantidadProducto=txtCantPoducto.getText();
+            int productoCantidad=Integer.parseInt(cantidadProducto);
+            String costoProducto=txtCstProducto.getText();
+            int productoCosto=Integer.parseInt(costoProducto);
+            String nombreProveedor=comboProveedor.getValue().toString();
+            String fechaPedido=datePedido.getValue().toString();
+            String fechaLlegada=dateLLegada.getValue().toString();  
+            String costoPedido=txtCstPedido.getText();
+            int pedidoCosto=Integer.parseInt(costoPedido);
+            ResultSet res;
+            
             try {
                 res=conector.consultar("select registrarPedido('"+nombreCli+"','"+apellidoCli+"',"+carnetCli+",'"+nombreProducto+"',"+productoCantidad+","+productoCosto+",'"+nombreProveedor+"','"+fechaPedido+"','"+fechaLlegada+"',"+pedidoCosto+");");
                 if (res.next()) {
                     String retorno=res.getString("registrarcliente");
                     if (retorno.equals("registrado")) {
  
-                        
+                        JOptionPane.showMessageDialog(null, " REGISTRADO ");
                                             
                     } else{
                         System.out.println(retorno);
@@ -68,6 +75,11 @@ public class RegistroNuevoClienteController implements Initializable{
             } catch (Exception e) {
                 System.err.println("Error : "+e);
             }
+            }else{
+                JOptionPane.showMessageDialog(null, "NO REGISTRADO REVISE SI TIENE ERRORES");
+            }
+            
+            
 		
 	}
         private ObservableList<String> llenarComboProveedor() { 
