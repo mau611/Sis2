@@ -30,7 +30,6 @@
       <TextField fx:id="txtNomProducto" layoutX="186.0" layoutY="325.0" prefHeight="31.0" prefWidth="207.0" />
       <TextField fx:id="txtCantPoducto" layoutX="164.0" layoutY="362.0" prefHeight="31.0" prefWidth="228.0" />
       <ComboBox fx:id="comboProveedor" layoutX="163.0" layoutY="505.0" prefHeight="31.0" prefWidth="207.0" promptText="Seleccione proveedor" />
-      <DatePicker fx:id="datePedido" layoutX="161.0" layoutY="542.0" />
       <DatePicker fx:id="dateLLegada" layoutX="161.0" layoutY="581.0" />
       <TextField fx:id="txtCstPedido" layoutX="160.0" layoutY="631.0" />
       <Button fx:id="btnRegistroPedido" layoutX="177.0" layoutY="679.0" mnemonicParsing="false" onAction="#btnRegistroPedidoAction" prefHeight="3.0" prefWidth="143.0" text="Registrar Pedido" />
@@ -40,5 +39,6 @@
       <Label layoutX="46.0" layoutY="461.0" text="Datos Pedido" />
       <Button fx:id="btnCancel" layoutX="26.0" layoutY="679.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="143.0" text="Cancelar" />
       <Button fx:id="btnFactura" layoutX="330.0" layoutY="679.0" mnemonicParsing="false" onAction="#abrirFactura" prefHeight="25.0" prefWidth="143.0" text="Generar Factura" />
+      <TextField fx:id="fechaActual" layoutX="160.0" layoutY="543.0" />
    </children>
 </AnchorPane>
